@@ -8,35 +8,26 @@ import { UserState } from "../Context/UserProvider";
 import CloseIcon from "@mui/icons-material/Close";
 
 const UserProfile = () => {
- 
+//  console.log("f")
   const navigate = useNavigate();
   const [prods, setprods] = useState([]);
   const { user } = UserState();
   
     let { id } = useParams();
   const fetchdata = async () => {
+    
  try {
-   var token = JSON.parse(localStorage.getItem("user")).token;
-
-   const config = {
-     headers: {
-       authorization: `Bearer ${token}`,
-     },
-   };
-
-   const { data } = await axios.get(
-     `http://localhost:5000/product/${id}`,
-     config
-   );
+   const { data } = await axios.get(`http://localhost:5000/product/${id}`);
    setprods(data);
    console.log(data)
  } catch (error) {
    // Handle error if necessary
-   console.error(error);
+   console.error("no user");
  }  
   };
 
   useEffect( () => {
+    // console.log("fds")
     fetchdata();
   },[]);
 
@@ -83,7 +74,7 @@ const UserProfile = () => {
             <ProductCard prod={pro}  key={pro._id}/>
           </IconButton>
       
-         {JSON.parse(user).id===id&& <IconButton
+         {user&&JSON.parse(user).id===id&& <IconButton
             onClick={() => handleRemoveProduct(pro._id)}
             style={{
               position: "absolute", // Position the close icon absolutely

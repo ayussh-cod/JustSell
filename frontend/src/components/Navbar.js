@@ -41,7 +41,7 @@ const logout = () => {
 };
  return (
    <Box sx={{ flexGrow: 1 }}>
-     <AppBar position="fixed" sx={{ backgroundColor: "black"}}>
+     <AppBar position="fixed" sx={{ backgroundColor: "black" }}>
        <Toolbar>
          <IconButton
            size="large"
@@ -69,10 +69,7 @@ const logout = () => {
          </Button>
          {user && (
            <Button onClick={Userclick}>
-             <Avatar
-               alt="Remy Sharp"
-               src="http://res.cloudinary.com/dopsbmkae/image/upload/v1686910810/zicvrkkebd4fi6pgapqt.png"
-             />
+             <Avatar alt="Remy Sharp" src={JSON.parse(user).pic} />
            </Button>
          )}
        </Toolbar>

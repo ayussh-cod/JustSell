@@ -18,16 +18,14 @@ router.route("/").post(Protect, async (req, res) => {
     let p = pic.pic;
     let q = p;
     let t;
-
+console.log(q);
     if (q) {
       t = q.split("/");
     } else {
       return;
     }
-    // console.log(t);
-    let image = `http://res.cloudinary.com/dopsbmkae/image/upload/w_200,h_200/${
-      t[t.length - 2]
-    }/${t[t.length - 1]}`;
+    console.log(t);
+    let image = `http://res.cloudinary.com/dopsbmkae/image/upload/w_200,h_200/${t[t.length - 2]}/${t[t.length - 1]}`;
     const pro = await product.create({
       name: pic.name,
       image: image,
@@ -35,20 +33,19 @@ router.route("/").post(Protect, async (req, res) => {
       price: pic.price,
       user: req.user._id,
     });
-    // console.log(pro);
+   
     res.status(200).json(pro);
   } catch (error) {
-    
+    console.log(error);
     throw new Error(error.message);
   }
 });
-router.route("/:id").get(Protect, async (req, res) => {
-  const {id}=req.params
-const userId = id;
+router.route("/:id").get(async (req, res) => {
 
+  const {id}=req.params
+   
+const userId = id;
   const data = await product.find({ user:  userId});
-  // console.log(req.user._id)
-  // console.log(data)
   res.status(200).json(data);
 });
 router.route("/remove/:id").get(Protect,async(req,res)=>{

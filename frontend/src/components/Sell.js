@@ -4,6 +4,7 @@ import { Box, Container, Stack, Button, Text } from "@mui/material";
 import axios from "axios"
 import { json, useNavigate } from "react-router-dom";
 import { UserState } from "../Context/UserProvider";
+import { LoadingButton } from "@mui/lab";
 
 const Sell = () => {
   
@@ -69,7 +70,7 @@ const Sell = () => {
     <Container
       style={{
         display: "flex",
-   
+
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
@@ -83,7 +84,6 @@ const Sell = () => {
         width={{ xs: "100%", sm: "70%", md: "50%" }}
         height="75%"
         marginTop="50px"
-        
       >
         <Stack spacing={5}>
           <h1 style={{ marginLeft: "180px", marginTop: "50px" }}>Bechde</h1>
@@ -161,7 +161,7 @@ const Sell = () => {
           </FormControl>
         </Stack>
       </Box>
-      <Button
+      {/* <Button
         onClick={() => handleSubmit({ pic, name, desc, price })}
         sx={{
           marginTop: "20px",
@@ -176,7 +176,22 @@ const Sell = () => {
         }}
       >
         Submit
-      </Button>
+      </Button> */}
+
+      <LoadingButton
+        onClick={(e) => handleSubmit({ pic, name, desc, price })}
+        sx={{
+          marginTop: "20px",
+          background: "White",
+          width: "43%",
+          height: "5%",
+        }}
+        loading={loading}
+        variant="outlined"
+        // disabled
+      >
+        <span sx={{ color: "black" }}>Submit</span>
+      </LoadingButton>
     </Container>
   );
 };

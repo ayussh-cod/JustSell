@@ -18,6 +18,7 @@ const Product = () => {
         },
       });
       setProd(data);
+     
     } catch (error) {
       console.error("Error fetching product:", error);
     }
@@ -25,6 +26,7 @@ const Product = () => {
 
   useEffect(() => {
     fetchProd();
+    // console.log()
   }, []);
 
   return (
@@ -53,9 +55,10 @@ const Product = () => {
             <Typography variant="h4" gutterBottom>
               Product Details
             </Typography>
+        
             <CardMedia
               component="img"
-              image="http://res.cloudinary.com/dopsbmkae/image/upload/w_500,h_500/v1686910810/zicvrkkebd4fi6pgapqt.png"
+              image={prod&&prod[0].image}
               alt="Product Image"
               sx={{
                 objectFit: "contain",
@@ -63,9 +66,9 @@ const Product = () => {
                 marginBottom: "24px",
               }}
             />
-           
-              <PriceCard prod={prod} />
-           
+
+            <PriceCard prod={prod} />
+
             <Typography variant="h5" gutterBottom sx={{ marginTop: "24px" }}>
               Product Description
             </Typography>
